@@ -3,13 +3,12 @@ import '../mixins/snackbar_mixin.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 
-class WordFormerController extends GetxController with SnackbarMixin{
+class WordFormerController extends GetxController with SnackbarMixin {
   List<dynamic> get question => [1, "L", "E", "P", "H", "A", "N", 2];
   List<String> get options => ["L", "E", "T", "M"];
   List<String> get correctAnswer => ["E", "L", "E", "P", "H", "A", "N", "T"];
 
-  String get heading =>
-      'WordFormation';
+  String get heading => 'WordFormation';
 
   final _isDropped = false.obs;
   bool get isDropped => _isDropped.value;
@@ -53,18 +52,15 @@ class WordFormerController extends GetxController with SnackbarMixin{
   }
 
   onTappedDoneButton() {
-    for(int i=0;i<userAnswer.length;i++){
-      if(userAnswer[i] == 1){
+    for (int i = 0; i < userAnswer.length; i++) {
+      if (userAnswer[i] is int) {
         showErrorSnackbar(title: 'Error', message: 'Complete the word');
-      return;
-
+        return;
       }
-
     }
-      
-    
+
     Function deepEq = const DeepCollectionEquality().equals;
-    isSuccess = deepEq(correctAnswer,userAnswer);
+    isSuccess = deepEq(correctAnswer, userAnswer);
     if (isSuccess) {
       showSuccessSnackbar(
           title: 'Success', message: 'You got the correct answer');
@@ -72,5 +68,4 @@ class WordFormerController extends GetxController with SnackbarMixin{
       showErrorSnackbar(title: 'Error', message: 'Incorrect answer');
     }
   }
-
 }

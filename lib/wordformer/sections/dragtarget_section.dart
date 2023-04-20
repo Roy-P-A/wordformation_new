@@ -16,46 +16,22 @@ class DragTargetection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (controller.question[index] is int) {
-            return DragTarget(
-              builder:
-                  (context, candidateData, rejectedData) {
-                return controller.isDropped
-                    ? Container(
-                        color: Colors.blue,
-                        width: 100,
-                        child: Text(
-                          controller.options[
-                              controller.indexOfAnswers],
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              decoration:
-                                  TextDecoration.underline),
-                        ),
-                      )
-                    : Container(
-                        color: Colors.blue,
-                        width: 100,
-                        child: const Text("_____"),
-                      );
-              },
-              onWillAccept: (data) {
-                return data ==
-                    controller
-                        .options[controller.indexOfAnswers];
-              },
-              onAccept: (data) {
-                controller.changeState();
-                controller.locateIndex1(index);
-              },
-            );
+            return dragTargetElement(index);
           } else {
-            return Container(
-              color: Colors.blue,
-              width: 100,
-              child: Text(
-                controller.question[index],
-                style: const TextStyle(fontSize: 20),
+            return AspectRatio(
+              aspectRatio: 1,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  color: Colors.blue,
+                  child: Text(
+                    controller.question[index],
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
               ),
             );
           }
@@ -65,5 +41,51 @@ class DragTargetection extends StatelessWidget {
             ),
         itemCount: controller.question.length);
   }
-}
 
+  Widget dragTargetElement(int index) {
+    return DragTarget(
+      builder: (context, candidateData, rejectedData) {
+        return controller.isDropped
+            ? AspectRatio(
+                aspectRatio: 1,
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    color: Colors.blue,
+                    child: Text(
+                      controller.options[controller.indexOfAnswers],
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),
+              )
+            : AspectRatio(
+                aspectRatio: 1,
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    color: Colors.blue,
+                    child: Text(
+                      "__",
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),
+              );
+      },
+      onWillAccept: (data) {
+        return data == controller.options[controller.indexOfAnswers];
+      },
+      onAccept: (data) {
+        controller.changeState();
+        controller.locateIndex1(index);
+      },
+    );
+  }
+}
