@@ -14,53 +14,65 @@ class WordFormerMainSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final smallmobile = MediaQuery.of(context).size.height < 500;
-    return LayoutBuilder(builder: (context, constraints) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-                flex: 1,
-                child: Center(
-                  child: MediaQuery(
-                    data: const MediaQueryData(textScaleFactor: 1),
-                    child: HtmlWidget(
-                      controller.heading,
+    return Expanded(
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: MediaQuery(
+                  data: const MediaQueryData(textScaleFactor: 1),
+                  child: HtmlWidget(controller.heading,
                       textStyle: smallmobile
                           ? AppTheme.activityTheme.textTheme.headline5
-                              ?.copyWith(color: const Color(0xFF16313D))
-                          : AppTheme.activityTheme.textTheme.headline3
-                              ?.copyWith(color: const Color(0xFF16313D)),
-                    ),
-                  ),
+                          : AppTheme.activityTheme.textTheme.headline2),
                 ),
               ),
-          SizedBox(
-            height: constraints.maxHeight/2,
-            child: Row(
-              children: [
-                const SizedBox(
-                  height: 200,
-                  width:200,
-                  child: Placeholder(),
-                ),
-                SizedBox(
-                  width: 200,
-                  child: DragTargetection(controller: controller),
-                ),
-              ],
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 600,
-            height: constraints.maxHeight/4,
-            child: DraggableSection(controller: controller),
-          ),
-        ],
-      );
-    });
+            Expanded(
+              flex: 5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: DragTargetection(controller: controller),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              flex: 2,
+              child: DraggableSection(controller: controller),
+            ),
+            const Expanded(
+              flex: 1,
+              child: SizedBox(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

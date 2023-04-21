@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:missing/wordformer/wordformer_controller.dart';
-
 import '../widgets/dimensions.dart';
 import '../widgets/tr_icon_button.dart';
 import 'sections/wordformer_main_section.dart';
@@ -34,12 +33,13 @@ class WordFormerScreen extends StatelessWidget {
                   right: false,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                        horizontal: 20, vertical: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         WordFormerMainSection(controller: controller),
+                        const SizedBox(width: 20,),
                         _sideMenu(),
                       ],
                     ),
