@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../wordformer_controller.dart';
 
 class DragTargetection extends StatelessWidget {
@@ -15,9 +13,8 @@ class DragTargetection extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context,constraints) {
-        return Container(
-          color: Colors.red,
-          width:200,
+        return SizedBox(
+          height: constraints.maxHeight/2,
           child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../mixins/snackbar_mixin.dart';
 // ignore: depend_on_referenced_packages
@@ -7,8 +8,9 @@ class WordFormerController extends GetxController with SnackbarMixin {
   List<dynamic> get question => [1, "L", "E", "P", "H", "A", "N", 2];
   List<String> get options => ["L", "E", "T", "M"];
   List<String> get correctAnswer => ["E", "L", "E", "P", "H", "A", "N", "T"];
+  ByteData? imageBytes;
 
-  String get heading => 'WordFormation';
+  String get heading => 'Word Formation';
 
   final _isDropped = false.obs;
   bool get isDropped => _isDropped.value;
@@ -29,7 +31,15 @@ class WordFormerController extends GetxController with SnackbarMixin {
     for (int i = 0; i < question.length; i++) {
       _userAnswer.add(question[i]);
     }
+
     super.onInit();
+  }
+
+  @override
+  void onReady() async {
+    imageBytes = await rootBundle.load('assets/images/elephant.jpg');
+    update();
+    super.onReady();
   }
 
   void changeState() {
@@ -58,7 +68,6 @@ class WordFormerController extends GetxController with SnackbarMixin {
         return;
       }
     }
-
     Function deepEq = const DeepCollectionEquality().equals;
     isSuccess = deepEq(correctAnswer, userAnswer);
     if (isSuccess) {

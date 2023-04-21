@@ -27,10 +27,10 @@ class WordFormerMainSection extends StatelessWidget {
               child: Center(
                 child: MediaQuery(
                   data: const MediaQueryData(textScaleFactor: 1),
-                  child: HtmlWidget(controller.heading,
-                      textStyle: smallmobile
+                  child: Text(controller.heading,
+                      style: smallmobile
                           ? AppTheme.activityTheme.textTheme.headline5
-                          : AppTheme.activityTheme.textTheme.headline2),
+                          : AppTheme.activityTheme.textTheme.headline4),
                 ),
               ),
             ),
@@ -42,11 +42,15 @@ class WordFormerMainSection extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 3,
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        color: Colors.yellow,
-                      ),
+                    child: Center(
+                      child: controller.imageBytes != null
+                          ? AspectRatio(
+                              aspectRatio: 1.5,
+                              child: Image.memory(
+                                controller.imageBytes!.buffer.asUint8List(),
+                                fit: BoxFit.contain,
+                              ))
+                          : const CircularProgressIndicator(),
                     ),
                   ),
                   const SizedBox(
