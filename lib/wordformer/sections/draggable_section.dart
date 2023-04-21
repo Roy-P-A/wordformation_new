@@ -12,19 +12,21 @@ class DraggableSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return ListView.separated(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return draggableElement(context, controller, index, constraints);
-        },
-        separatorBuilder: (context, index) => const SizedBox(
-          width: 10,
-        ),
-        itemCount: controller.options.length,
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return draggableElement(context, controller, index, constraints);
+          },
+          separatorBuilder: (context, index) => const SizedBox(
+            width: 10,
+          ),
+          itemCount: controller.options.length,
+        );
+      },
+    );
   }
 
   Widget draggableElement(BuildContext context, WordFormerController controller,
@@ -61,10 +63,10 @@ class DraggableSection extends StatelessWidget {
           ),
         ),
         onDragStarted: () {
-          return controller.selectAnswerIndex(index);
+          controller.selectAnswerIndex(index);
         },
         onDragCompleted: () {
-          controller.selectAnswerIndex(index);
+         // controller.selectAnswerIndex(index);
           controller.updateUserAnswerList(controller.options[index]);
         },
         childWhenDragging: Center(

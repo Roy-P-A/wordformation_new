@@ -48,15 +48,17 @@ class WordFormerController extends GetxController with SnackbarMixin {
 
   void selectAnswerIndex(int index) {
     _selectedAnswerIndex(index);
+    print("selected answer $_selectedAnswerIndex");
   }
 
   void locateIndex1(int index) {
     _locateIndex.value = index;
-    print(_locateIndex);
+    print("locate answer $_locateIndex");
   }
 
   void updateUserAnswerList(String data) {
     _userAnswer[locateIndex] = data;
+    update();
     print(question);
     print(userAnswer);
   }
