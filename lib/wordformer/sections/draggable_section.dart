@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../wordformer_controller.dart';
 
 class DraggableSection extends StatelessWidget {
@@ -28,13 +29,21 @@ class DraggableSection extends StatelessWidget {
 
   Widget draggableElement(BuildContext context, WordFormerController controller,
       int index, BoxConstraints constraints) {
+    final screenDimention = MediaQuery.of(context).size.shortestSide;
+    final tab = screenDimention < 1100 && screenDimention >= 650;
+
     return Center(
       child: Draggable(
         data: controller.options[index],
         feedback: Center(
           child: Container(
-            width: constraints.maxWidth / controller.options.length / 2,
-            padding: const EdgeInsets.all(15),
+            width: (GetPlatform.isDesktop || tab)
+                ? constraints.maxWidth / controller.options.length / 3
+                : constraints.maxWidth / controller.options.length / 2,
+            height: (GetPlatform.isDesktop || tab)
+                ? constraints.maxWidth / controller.options.length / 3
+                : constraints.maxWidth / controller.options.length / 2,
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: const Color(0xFF004AAD),
               borderRadius: BorderRadius.circular(5),
@@ -58,23 +67,25 @@ class DraggableSection extends StatelessWidget {
           controller.selectAnswerIndex(index);
           controller.updateUserAnswerList(controller.options[index]);
         },
-        childWhenDragging: AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            width: constraints.maxWidth / controller.options.length,
-            padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: const Color(0xFF004AAD),
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.white, width: 2),
-            ),
-            child: Align(
-              child: Text(
-                controller.options[index],
-                style: Theme.of(context)
-                    .textTheme
-                    .headline3!
-                    .copyWith(color: Colors.white),
+        childWhenDragging: Center(
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              width: constraints.maxWidth / controller.options.length,
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: const Color(0xFF004AAD),
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: Colors.white, width: 2),
+              ),
+              child: Align(
+                child: Text(
+                  controller.options[index],
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3!
+                      .copyWith(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -83,7 +94,7 @@ class DraggableSection extends StatelessWidget {
           aspectRatio: 1,
           child: Container(
             width: constraints.maxWidth / controller.options.length,
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               color: const Color(0xFF004AAD),
               borderRadius: BorderRadius.circular(5),

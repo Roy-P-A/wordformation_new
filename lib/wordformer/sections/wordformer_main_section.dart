@@ -30,7 +30,7 @@ class WordFormerMainSection extends StatelessWidget {
                   child: Text(controller.heading,
                       style: smallmobile
                           ? AppTheme.activityTheme.textTheme.headline5
-                          : AppTheme.activityTheme.textTheme.headline4),
+                          : AppTheme.activityTheme.textTheme.headline2),
                 ),
               ),
             ),

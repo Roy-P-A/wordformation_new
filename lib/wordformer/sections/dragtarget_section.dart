@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../wordformer_controller.dart';
 
 class DragTargetection extends StatelessWidget {
@@ -11,10 +12,12 @@ class DragTargetection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenDimention = MediaQuery.of(context).size.shortestSide;
+    final tab = screenDimention < 1100 && screenDimention >= 650;
     return LayoutBuilder(
       builder: (context,constraints) {
         return SizedBox(
-          height: constraints.maxHeight/2,
+          height: (GetPlatform.isDesktop || tab)?constraints.maxHeight/3:  constraints.maxHeight/2,
           child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -23,7 +26,7 @@ class DragTargetection extends StatelessWidget {
                   return dragTargetElement(controller,constraints,index);
                 } else {
                   return Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(2),
                     width:constraints.maxWidth/controller.question.length,
                     //height: constraints.maxHeight/2,
                     color: Colors.blue,
@@ -50,7 +53,7 @@ class DragTargetection extends StatelessWidget {
     return DragTarget(
       builder: (context, candidateData, rejectedData) {
         return Container(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(2),
           width:constraints.maxWidth/controller.question.length,
          // height: constraints.maxHeight/2,
           color: Colors.blue,
@@ -59,9 +62,9 @@ class DragTargetection extends StatelessWidget {
               controller.isDropped
                   ? controller.options[controller.indexOfAnswers]
                   : "__",
-              style: Theme.of(context).textTheme.headline3!.copyWith(
+              style: Theme.of(context).textTheme.headline2!.copyWith(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w900,
                   decoration: TextDecoration.underline),
             ),
           ),
