@@ -27,7 +27,27 @@ class DragTargetection extends StatelessWidget {
                 if (controller.userAnswer[index] is int) {
                   return dragTargetElement(controller, constraints, index);
                 } else {
-                  return Obx(
+                   if(controller.question[index] is int)  {
+                        return Obx(
+                    () => Container(
+                      padding: const EdgeInsets.all(2),
+                      width:
+                          constraints.maxWidth / controller.userAnswer.length,
+                      color: Colors.blue,
+                      child: Align(
+                        child: Text(
+                          controller.userAnswer[index],
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3!
+                              .copyWith(color: Colors.white,decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ),
+                  );
+                   }
+                   else{
+                     return Obx(
                     () => Container(
                       padding: const EdgeInsets.all(2),
                       width:
@@ -44,6 +64,9 @@ class DragTargetection extends StatelessWidget {
                       ),
                     ),
                   );
+
+                   }
+                  
                 }
               },
               separatorBuilder: (context, index) => const SizedBox(),
