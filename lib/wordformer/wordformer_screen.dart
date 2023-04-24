@@ -16,6 +16,9 @@ class WordFormerScreen extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
     ]);
 
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return GetBuilder<WordFormerController>(
         init: WordFormerController(),
         builder: (controller) {
@@ -25,18 +28,18 @@ class WordFormerScreen extends StatelessWidget {
                 Image.asset(
                   'assets/images/bg.png',
                   fit: BoxFit.fitWidth,
-                  height: double.infinity,
-                  width: double.infinity,
+                  height: height,
+                  width: width,
                   alignment: Alignment.center,
                 ),
                 SafeArea(
                   right: false,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                        horizontal: 20, vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         WordFormerMainSection(controller: controller),
                         const SizedBox(width: 20,),

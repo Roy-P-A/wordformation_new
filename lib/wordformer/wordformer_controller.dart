@@ -6,8 +6,8 @@ import '../mixins/snackbar_mixin.dart';
 import 'package:collection/collection.dart';
 
 class WordFormerController extends GetxController with SnackbarMixin {
-  List<dynamic> get question => [1, "L", "E", "P", "H", "A", "N", 2];
-  List<String> get options => ["L", "E", "T", "M"];
+  List<dynamic> get question => [1, "L", "E", 3, "H", "A", "N", 2];
+  List<String> get options => ["L", "E", "T", "M","P"];
   List<String> get correctAnswer => ["E", "L", "E", "P", "H", "A", "N", "T"];
   ByteData? imageBytes;
 

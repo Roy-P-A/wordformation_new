@@ -28,7 +28,7 @@ class DragTargetection extends StatelessWidget {
               } else {
                 return Container(
                   padding: const EdgeInsets.all(2),
-                  width: constraints.maxWidth / controller.userAnswer.length,
+                  width: constraints.maxWidth / controller.question.length,
                   color: Colors.blue,
                   child: Align(
                     child: Text(

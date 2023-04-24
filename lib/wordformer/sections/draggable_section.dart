@@ -66,7 +66,6 @@ class DraggableSection extends StatelessWidget {
           controller.selectAnswerIndex(index);
         },
         onDragCompleted: () {
-         // controller.selectAnswerIndex(index);
           controller.updateUserAnswerList(controller.options[index]);
         },
         childWhenDragging: Center(
