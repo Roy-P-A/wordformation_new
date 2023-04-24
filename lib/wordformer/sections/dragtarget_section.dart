@@ -19,59 +19,30 @@ class DragTargetection extends StatelessWidget {
         height: (GetPlatform.isDesktop || tab)
             ? constraints.maxHeight / 3
             : constraints.maxHeight / 2,
-        child: Obx(
-          () => ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                if (controller.userAnswer[index] is int) {
-                  return dragTargetElement(controller, constraints, index);
-                } else {
-                   if(controller.question[index] is int)  {
-                        return Obx(
-                    () => Container(
-                      padding: const EdgeInsets.all(2),
-                      width:
-                          constraints.maxWidth / controller.userAnswer.length,
-                      color: Colors.blue,
-                      child: Align(
-                        child: Text(
-                          controller.userAnswer[index],
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3!
-                              .copyWith(color: Colors.white,decoration: TextDecoration.underline),
-                        ),
-                      ),
+        child: ListView.separated(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              if (controller.question[index] is int) {
+                return dragTargetElement(controller, constraints, index);
+              } else {
+                return Container(
+                  padding: const EdgeInsets.all(2),
+                  width: constraints.maxWidth / controller.userAnswer.length,
+                  color: Colors.blue,
+                  child: Align(
+                    child: Text(
+                      controller.userAnswer[index],
+                      style: Theme.of(context).textTheme.headline3!.copyWith(
+                          color: Colors.white,
+                          ),
                     ),
-                  );
-                   }
-                   else{
-                     return Obx(
-                    () => Container(
-                      padding: const EdgeInsets.all(2),
-                      width:
-                          constraints.maxWidth / controller.userAnswer.length,
-                      color: Colors.blue,
-                      child: Align(
-                        child: Text(
-                          controller.userAnswer[index],
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  );
-
-                   }
-                  
-                }
-              },
-              separatorBuilder: (context, index) => const SizedBox(),
-              itemCount: controller.userAnswer.length),
-        ),
+                  ),
+                );
+              }
+            },
+            separatorBuilder: (context, index) => const SizedBox(),
+            itemCount: controller.question.length),
       );
     });
   }
@@ -80,23 +51,21 @@ class DragTargetection extends StatelessWidget {
       WordFormerController controller, BoxConstraints constraints, int index) {
     return DragTarget(
       builder: (context, candidateData, rejectedData) {
-        return Obx(
-          () => Container(
-            padding: const EdgeInsets.all(2),
-            width: constraints.maxWidth / controller.userAnswer.length,
-            color: Colors.blue,
-            child: Align(
-              child: Text(
-                // controller.isDropped
-                //     ? controller.options[controller.indexOfAnswers]
-                //     : 
-                    
-                    "__",
-                style: Theme.of(context).textTheme.headline2!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    decoration: TextDecoration.underline),
-              ),
+        return Container(
+          padding: const EdgeInsets.all(2),
+          width: constraints.maxWidth / controller.question.length,
+          color: Colors.blue,
+          child: Align(
+            child: Text(
+
+                  controller.userAnswer[index] is int? "__":controller.userAnswer[index].toString(),
+              
+                  
+              
+              style: Theme.of(context).textTheme.headline2!.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  decoration: TextDecoration.underline),
             ),
           ),
         );
