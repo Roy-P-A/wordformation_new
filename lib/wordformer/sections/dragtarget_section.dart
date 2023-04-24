@@ -34,7 +34,7 @@ class DragTargetection extends StatelessWidget {
                     child: Text(
                       controller.userAnswer[index],
                       style: Theme.of(context).textTheme.headline3!.copyWith(
-                          color: Colors.white,
+                            color: Colors.white,
                           ),
                     ),
                   ),
@@ -57,11 +57,9 @@ class DragTargetection extends StatelessWidget {
           color: Colors.blue,
           child: Align(
             child: Text(
-
-                  controller.userAnswer[index] is int? "__":controller.userAnswer[index].toString(),
-              
-                  
-              
+              controller.userAnswer[index] is int
+                  ? "__"
+                  : controller.userAnswer[index].toString(),
               style: Theme.of(context).textTheme.headline2!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
@@ -74,8 +72,7 @@ class DragTargetection extends StatelessWidget {
         return data == controller.options[controller.indexOfAnswers];
       },
       onAccept: (data) {
-        controller.changeState();
-        controller.locateIndex1(index);
+        controller.locateIndexFinder(index);
       },
     );
   }

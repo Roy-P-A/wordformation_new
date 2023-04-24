@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../mixins/snackbar_mixin.dart';
@@ -42,25 +43,18 @@ class WordFormerController extends GetxController with SnackbarMixin {
     super.onReady();
   }
 
-  void changeState() {
-    _isDropped.value = true;
-  }
-
   void selectAnswerIndex(int index) {
     _selectedAnswerIndex(index);
-    print("selected answer $_selectedAnswerIndex");
   }
 
-  void locateIndex1(int index) {
+  void locateIndexFinder(int index) {
     _locateIndex.value = index;
-    print("locate answer $_locateIndex");
   }
 
   void updateUserAnswerList(String data) {
     _userAnswer[locateIndex] = data;
     update();
-    print(question);
-    print(userAnswer);
+    debugPrint("$_userAnswer");
   }
 
   onTappedDoneButton() {
